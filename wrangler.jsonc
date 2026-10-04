@@ -1,56 +1,54 @@
 {
-  // =============================================================
-  //  Irkam Media — configuration Cloudflare Workers
-  //  Réf. : https://developers.cloudflare.com/workers/
-  //
-  //  • `public/` est publié tel quel : le site est statique, sans build.
-  //  • `worker/index.js` ne traite que /api/*.
-  //  • Les secrets (clé API Resend) ne vont JAMAIS ici : utilisez
-  //    `wrangler secret put RESEND_API_KEY`.
-  // =============================================================
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "irkam-media",
-  "main": "worker/index.js",
-  "compatibility_date": "2026-10-01",
+	// =============================================================
+	//  Irkam Media — configuration Cloudflare Workers
+	//  Réf. : https://developers.cloudflare.com/workers/
+	//
+	//  • `public/` est publié tel quel : le site est statique, sans build.
+	//  • `worker/index.js` ne traite que /api/*.
+	//  • Les secrets (clé API Resend) ne vont JAMAIS ici : utilisez
+	//    `wrangler secret put RESEND_API_KEY`.
+	// =============================================================
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "irkam-media",
+	"main": "worker/index.js",
+	"compatibility_date": "2026-10-01",
+	// Journalisation : permet de vérifier si un e-mail Resend est bien
+	// parti (Workers Logs, gratuit jusqu'à 200 000 entrées/jour).
+	"observability": {
+		"enabled": true
+	},
+	"assets": {
+		"directory": "./public",
+		"binding": "ASSETS"
+	},
+	"d1_databases": [
+		{
+			// « binding » est le nom sous lequel la base est exposée au
+			// Worker : worker/index.js y accède via `env.DB`.
+			// ⚠ Ne pas renommer — sinon aucune demande n'est stockée.
+			"binding": "DB",
 
-  // Journalisation : permet de vérifier si un e-mail Resend est bien
-  // parti (Workers Logs, gratuit jusqu'à 200 000 entrées/jour).
-  "observability": {
-    "enabled": true
-  },
+			// Doit correspondre au nom de la ressource D1 dans votre
+			// compte, car c'est ce nom que les scripts npm
+			// (db:create / db:init) passent à la CLI.
+			"database_name": "irkam-submissions",
 
-  "assets": {
-    "directory": "./public",
-    "binding": "ASSETS"
-  },
-
-  "d1_databases": [
-    {
-      // ▶ À FAIRE : récupérez l'identifiant renvoyé par
-      //   npx wrangler d1 create irkam-submissions
-      //   et remplacez le placeholder ci-dessous.
-      "binding": "DB",
-      "database_name": "irkam-submissions",
-      "database_id": "REMPLACER_PAR_L_IDENTIFIANT_D1"
-    }
-  ],
-
-  // Variables non secrètes : visibles dans le tableau de bord Cloudflare.
-  "vars": {
-    // Adresse de réception des demandes
-    "CONTACT_EMAIL": "irkammedia@gmail.com",
-
-    // Adresse d'expédition. DOIT appartenir à un domaine vérifié dans
-    // Resend, sinon l'envoi est refusé.
-    "RESEND_FROM": "Irkam Media <no-reply@irkammedia.com>",
-
-    // Origine autorisée à appeler /api/contact. À adapter si votre
-    // domaine n'est pas irkammedia.com.
-    "ALLOWED_ORIGIN": "https://irkammedia.com",
-
-    // Sel du hachage des IP (limitation de débit).
-    // ▶ À FAIRE : remplacer par une valeur aléatoire, p. ex.
-    //   openssl rand -hex 32
-    "IP_SALT": "REMPLACER_PAR_UN_SEL_ALEATOIRE"
-  }
+			"database_id": "7d2d7e60-0624-4a72-9e54-e7cbeeeee7bf"
+		}
+	],
+	// Variables non secrètes : visibles dans le tableau de bord Cloudflare.
+	"vars": {
+		// Adresse de réception des demandes
+		"CONTACT_EMAIL": "irkammedia@gmail.com",
+		// Adresse d'expédition. DOIT appartenir à un domaine vérifié dans
+		// Resend, sinon l'envoi est refusé.
+		"RESEND_FROM": "Irkam Media <no-reply@irkammedia.com>",
+		// Origine autorisée à appeler /api/contact. À adapter si votre
+		// domaine n'est pas irkammedia.com.
+		"ALLOWED_ORIGIN": "https://irkammedia.com",
+		// Sel du hachage des IP (limitation du débit).
+		// ▶ À FAIRE : remplacer par une valeur aléatoire, p. ex.
+		//   openssl rand -hex 32
+		"IP_SALT": "REMPLACER_PAR_UN_SEL_ALEATOIRE"
+	}
 }
