@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0v60" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="34%" r="46%">
+      <stop offset="0%" stop-color="#ffcc00" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#ffcc00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#08090a"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <g transform="translate(84 92)">
+    <rect width="56" height="56" rx="14" fill="#ffcc00" fill-opacity="0.08" stroke="#ffcc00" stroke-opacity="0.25" stroke-width="1.5"/>
+    <path d="M18 16v24M18 28l13-12M18 28l13 12" fill="none" stroke="#ffcc00" stroke-width="3.4" stroke-linecap="square"/>
+    <text x="74" y="40" fill="#eef0f2" font-size="30" font-weight="700" letter-spacing="-0.8">Irkam<tspan fill="#ffcc00">Media</tspan></text>
+  </g>
+
+  <text x="84" y="330" fill="#eef0f2" font-size="82" font-weight="700" letter-spacing="-3.4">Software built</text>
+  <text x="84" y="420" fill="#ffcc00" font-size="82" font-weight="700" letter-spacing="-3.4">around your business.</text>
+
+  <text x="84" y="500" fill="#8b939b" font-size="27" font-weight="400">Custom software solutions tailored to each client's needs.</text>
+
+  <rect x="84" y="540" width="176" height="4" fill="#ffcc00"/>
+</svg>

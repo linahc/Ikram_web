@@ -1,0 +1,9 @@
+# Normalise les fins de ligne : le code déployé sur Cloudflare est en LF.
+# Sans cela, Git convertit en CRLF sur Windows et crée des diffs inutiles.
+* text=auto eol=lf
+
+# Fichiers binaires : ne jamais toucher
+*.woff2 binary
+*.png  binary
+*.jpg  binary
+*.ico  binary

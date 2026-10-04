@@ -1,0 +1,23 @@
+{
+  "name": "irkam-media",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site vitrine Irkam Media — statique, avec formulaire de contact Cloudflare Worker + D1 + Resend.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev --remote",
+    "tail": "wrangler tail",
+    "logs": "wrangler tail --format pretty",
+    "db:create": "wrangler d1 create irkam-submissions",
+    "db:init": "wrangler d1 execute irkam-submissions --remote --file=./worker/schema.sql",
+    "db:init:local": "wrangler d1 execute irkam-submissions --local --file=./worker/schema.sql",
+    "db:recent": "wrangler d1 execute irkam-submissions --remote --command \"SELECT id, created_at, name, email, project_type, budget, email_delivered, status FROM contact_submissions ORDER BY id DESC LIMIT 20\"",
+    "secret:resend": "wrangler secret put RESEND_API_KEY",
+    "check": "wrangler deploy --dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

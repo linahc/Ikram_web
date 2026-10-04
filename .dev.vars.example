@@ -1,0 +1,14 @@
+# Fichier d'exemple pour le développement local.
+# Copiez-le en `.dev.vars` (ignoré par Git) et renseignez vos valeurs :
+#   cp .dev.vars.example .dev.vars
+#
+# En production, ces valeurs sont des SECRETS Cloudflare :
+#   npx wrangler secret put RESEND_API_KEY
+#
+# .dev.vars est lisible par `wrangler dev` uniquement ; il n'est jamais déployé.
+
+RESEND_API_KEY="re_VOTRE_CLE_ICI"
+
+# Base D1 locale créée pour les essais :
+#   npx wrangler d1 create irkam-submissions-local
+# puis remplacez `database_id` dans wrangler.jsonc le temps du développement.

@@ -1,0 +1,24 @@
+# Dépendances / tooling Cloudflare
+node_modules/
+
+# Wrangler
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+
+# Secrets — NE JAMAIS versionner
+.env
+.env.*
+*.pem
+
+# Système d'exploitation / éditeurs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Export de base D1 (contient des données personnelles de contacts)
+*.sqlite
+*.sqlite3
+backups/
